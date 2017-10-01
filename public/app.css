@@ -23,10 +23,21 @@ g.node circle {
   }
 }
 
+g.inports text, g.outports text {
+  font-size: 6px;
+  fill: #AAA;
+}
+
 path.edge {
   stroke: #FFF;
   fill: none;
   stroke-width: 1px;
+  -webkit-filter: drop-shadow( -5px -5px 5px #000 );
+  filter: drop-shadow( -5px -5px 5px #000 );
+}
+
+path.edge:hover {
+  stroke-width: 3px;
 }
 
 path.oldEdge {
@@ -38,9 +49,12 @@ path.oldEdge {
   animation: dash 0.5s linear;// infinite;
 }
 
+text {
+  user-select: none;
+}
+
 g.node text.id {
   font-size: 8px;
-  user-select: none;
   fill: #FFF;
 }
 

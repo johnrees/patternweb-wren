@@ -9,6 +9,7 @@ function _calculateDefaultPoints({ height, width, wallHeight, roofOffset }) {
 }
 
 const makeCorePoints = {
+  name: "Wren/MakeCorePoints",
   fn: ({ DIMENSIONS }, done) =>
     done({ POINTS: _calculateDefaultPoints(DIMENSIONS) }),
   inports: ["DIMENSIONS"],
@@ -63,6 +64,7 @@ function _calculateFrameEdgePoints(value) {
 }
 
 const edgePoints = {
+  name: "Wren/EdgePoints",
   fn: ({}, done) => done({ FN: _calculateFrameEdgePoints }),
   inports: [],
   outports: ["FN"]

@@ -93,7 +93,14 @@ const makePort = (direction, obj) => (key, x, parentX, parentY) => (port, index)
 
   obj[_name.join(">")] = [x + parentX, cy + parentY]
 
-  return h("circle", { attrs: { cy, r: 3.5 }})
+  const text = (direction === "OUT") ?
+    h("text", { attrs: { y: cy+2, x: -5, "text-anchor": "end" }}, port) :
+    h("text", { attrs: { y: cy+2, x: 5, "text-anchor": "start" }}, port)
+
+  return [
+    h("circle", { attrs: { cy, r: 3.5 }}),
+    text
+  ]
 }
 const makeInport = makePort("IN", portPositions)
 const makeOutport = makePort("OUT", portPositions)
@@ -105,13 +112,13 @@ const nodeElements = Object.keys(nodes).map(key => {
 
   const component = $node.component.name || "?"
 
-  const inports = $node.component.inports.map(makeInport(key,-node.width/2, node.x-2, node.y))
-  const outports = $node.component.outports.map(makeOutport(key,node.width/2, node.x+2, node.y))
+  const inports = _.flatten($node.component.inports.map(makeInport(key,-node.width/2, node.x-2, node.y)))
+  const outports = _.flatten($node.component.outports.map(makeOutport(key,node.width/2, node.x+2, node.y)))
 
   return h("g.node", { on: { click: handleNodeClick }, attrs: { id: key, transform: `translate(${node.x}, ${node.y})` }}, [
+    h("rect", { attrs: { width: node.width, height: node.height, x: -node.width/2, y: -node.height/2 }}),
     h("g.inports", { attrs: { transform: `translate(${-node.width/2}, 1)` }}, inports),
     h("g.outports", { attrs: { transform: `translate(${node.width/2}, 1)` }}, outports),
-    h("rect", { attrs: { width: node.width, height: node.height, x: -node.width/2, y: -node.height/2 }}),
     h("text.id", { attrs: { y: -20, "text-anchor": "middle" }}, key),
     h("text.component", { attrs: { y: -10, "text-anchor": "middle" }}, component)
   ])
