@@ -10,12 +10,14 @@
     "test": "jest",
     "start": "webpack-dev-server",
     "lint": "prettier --write \"src/**/*.{js,json,css}\"",
-    "build": "cp -R public dist && PRODUCTION=true webpack -p",
+    "build": "cp -R public dist && PRODUCTION=true webpack",
     "deploy": "npm run build && ghpages -p dist && rm -rf dist"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "ghpages": "^0.0.10",
     "jest": "^21.1.0",
@@ -27,6 +29,7 @@
     "clipper-lib": "^6.2.1",
     "dagre-layout": "^0.8.0",
     "lodash": "^4.17.4",
+    "patternweb": "^0.0.2",
     "snabbdom": "^0.7.0",
     "snabbdom-to-html": "^3.3.0",
     "svg-pan-zoom": "^3.5.2"
