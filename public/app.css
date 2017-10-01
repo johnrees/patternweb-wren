@@ -2,6 +2,8 @@
 
 body {
   font-family: Menlo;
+  -webkit-font-smoothing: antialiased;
+  background: #222;
 }
 
 svg {
@@ -11,12 +13,27 @@ svg {
   cursor: -webkit-grab;
 }
 
-path {
-  stroke: black;
-  fill: none;
+g.node circle {
+  fill: #FFF;
 }
 
-text {
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+path.edge {
+  stroke: #666;
+  fill: none;
+  stroke-width: 1px;
+  stroke-dashoffset: 22;
+  stroke-dasharray: 10 1;
+  animation: dash 0.5s linear;// infinite;
+}
+
+g.node text {
   font-size: 8px;
   user-select: none;
+  fill: #FFF;
 }

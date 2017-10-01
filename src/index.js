@@ -64,7 +64,8 @@ const dimensions = {
 Β("pathFromOuterPoints", p.svg.makePathFromPoints, { POINTS: "outerPoints>POINTS", CLOSED: false })
 Β("makeObject", p.svg.makePathFromPoints, { POINTS: "outerPoints>POINTS", CLOSED: false })
 
-Β("outerPath", p.snabbdom.h, { NAME: "path", "OBJECT": { attrs: { d: "pathFromOuterPoints>PATH" }} })
+// Β("outerPath", p.snabbdom.h, { NAME: "path", "OBJECT": { attrs: { d: "pathFromOuterPoints>PATH" }} })
+Β("outerPath", p.snabbdom.h, { NAME: "path", "OBJECT": "pathFromOuterPoints>PATH" })
 Β("html", p.snabbdom.toHTML, { VNODE: "svg>VNODE" })
 
 Β("log2", p.core.log, { INPUT: "html>HTML" })
@@ -86,15 +87,15 @@ function handleNodeClick(event, node) {
 const {nodes, edges} = layout(graph)
 const nodeElements = Object.keys(nodes).map(key => {
   const node = nodes[key]
-  return h("g", { on: { click: handleNodeClick }, attrs: { id: key, transform: `translate(${node.x}, ${node.y})` }}, [
-    h("circle", { attrs: { r: node.width/2 }}),
-    h("text", { attrs: { x: 20 }}, key)
+  return h("g.node", { on: { click: handleNodeClick }, attrs: { id: key, transform: `translate(${node.x}, ${node.y})` }}, [
+    h("circle", { attrs: { r: node.width }}),
+    h("text", { attrs: { x: 10 }}, key)
   ])
 })
 
-const edgeElements = edges.map(points => h("path", { attrs: { d: _makePathFromPoints(points, false) }}))
+const edgeElements = edges.map(points => h("path.edge", { attrs: { d: _makePathFromPoints(points, false) }}))
 
-const graphData = nodeElements.concat(edgeElements)
+const graphData = edgeElements.concat(nodeElements)
 
 function render() {
   vnode = patch(vnode, view(graphData));
@@ -107,3 +108,15 @@ graph.run(db, function() {
   // console.log('done')
   // console.timeEnd("debug")
 })
+
+const panZoom = svgPanZoom("svg", {
+  zoomEnabled: true,
+  panEnabled: true,
+  controlIconsEnabled: true,
+  fit: true,
+  center: true,
+  preventMouseEventsDefault: false,
+  zoomScaleSensitivity: 0.5,
+  maxZoom: 2,
+  minZoom: 0.4
+});

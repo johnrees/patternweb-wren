@@ -7,7 +7,7 @@ function layout(graph) {
     // align: "TB",
     marginx: 50,
     marginy: 50,
-    ranksep: 150,
+    ranksep: 100,
     ranker: "network-simplex",
     minlen: 2
   });
@@ -22,7 +22,7 @@ function layout(graph) {
     })
   };
   for (const node of dag.nodes) {
-    g.setNode(node, { width: 30, height: 30 });
+    g.setNode(node, { width: 10, height: 10 });
   }
   for (const edge of dag.edges) {
     // console.log(edge)
