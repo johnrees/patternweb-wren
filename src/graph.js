@@ -22,7 +22,7 @@ function layout(graph) {
     })
   };
   for (const node of dag.nodes) {
-    g.setNode(node, { width: 10, height: 10 });
+    g.setNode(node, { width: 100, height: 60 });
   }
   for (const edge of dag.edges) {
     // console.log(edge)

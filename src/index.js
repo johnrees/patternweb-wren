@@ -84,12 +84,24 @@ function handleNodeClick(event, node) {
   console.log(JSON.stringify(db[node.elm.id], null, 2))
 }
 
+const makePort = (port, index) => h("circle", { attrs: { cy: 5 * index, r: 1.5 }})
+
 const {nodes, edges} = layout(graph)
 const nodeElements = Object.keys(nodes).map(key => {
   const node = nodes[key]
+  const $node = graph.find(key)
+
+  const component = $node.component.name || "?"
+
+  const inports = $node.component.inports.map(makePort)
+  const outports = $node.component.outports.map(makePort)
+
   return h("g.node", { on: { click: handleNodeClick }, attrs: { id: key, transform: `translate(${node.x}, ${node.y})` }}, [
-    h("circle", { attrs: { r: node.width }}),
-    h("text", { attrs: { x: 10 }}, key)
+    h("rect", { attrs: { width: node.width, height: node.height, x: -node.width/2, y: -node.height/2 }}),
+    h("g.inports", { attrs: { transform: `translate(${-node.width/2}, 1)` }}, inports),
+    h("g.outports", { attrs: { transform: `translate(${node.width/2}, 1)` }}, outports),
+    h("text.id", { attrs: { y: -20, "text-anchor": "middle" }}, key),
+    h("text.component", { attrs: { y: -10, "text-anchor": "middle" }}, component)
   ])
 })
 

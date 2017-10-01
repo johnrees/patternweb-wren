@@ -9,6 +9,7 @@ function _makePathFromPoints(points, closed) {
 }
 
 const makePathFromPoints = {
+  name: "SVG/MakePathFromPoints",
   fn: ({ POINTS, CLOSED = false }, done) =>
     done({ PATH: _makePathFromPoints(POINTS, CLOSED) }),
   inports: ["POINTS", "CLOSED"],

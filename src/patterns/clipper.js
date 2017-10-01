@@ -15,6 +15,7 @@ function _offset(points, delta, miterLimit = 10, scale = 100) {
 }
 
 const offset = {
+  name: "Clipper/Offset",
   fn: ({ POINTS, DELTA, MITER_LIMIT, SCALE }, done) =>
     done({ POINTS: _offset(POINTS, DELTA, MITER_LIMIT, SCALE) }),
   inports: ["POINTS", "DELTA", "SCALE"],

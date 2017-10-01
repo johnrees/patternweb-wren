@@ -32,6 +32,7 @@ const loopifyInGroups = (size, offset = 0) => arr => {
 };
 
 const loopifyInPairs = {
+  name: "List/LoopifyInGroups",
   fn: ({ ARRAY }, done) => done({ PAIRS: loopifyInGroups(2)(ARRAY) }),
   inports: ["ARRAY"],
   outports: ["PAIRS"]

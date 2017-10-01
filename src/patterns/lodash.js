@@ -15,6 +15,7 @@ function _offset(points, delta, miterLimit = 10, scale = 100) {
 }
 
 const get = {
+  name: "Lodash/Get",
   fn: ({ OBJECT, PATH, DEFAULT_VALUE = undefined }, done) =>
     done({ VALUE: _.get(OBJECT, PATH, DEFAULT_VALUE) }),
   inports: ["OBJECT", "PATH", "DEFAULT_VALUE"],
@@ -22,6 +23,7 @@ const get = {
 };
 
 const divide = {
+  name: "Lodash/Divide",
   fn: ({ DIVIDEND, DIVISOR }, done) =>
     done({ QUOTIENT: _.divide(DIVIDEND, DIVISOR) }),
   inports: ["DIVIDEND", "DIVISOR"],
@@ -29,6 +31,7 @@ const divide = {
 };
 
 const map = {
+  name: "Lodash/Map",
   fn: ({ COLLECTION, ITERATEE }, done) =>
     done({ RESULT: _.map(COLLECTION, ITERATEE) }),
   inports: ["COLLECTION", "ITERATEE"],

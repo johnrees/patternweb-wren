@@ -7,6 +7,7 @@ const add = {
 };
 
 const log = {
+  name: "Core/Log",
   fn: ({ INPUT }, done) => {
     console.log(INPUT);
     done({});
@@ -16,7 +17,7 @@ const log = {
 };
 
 const repeater = {
-  name: "repeater",
+  name: "Core/Repeater",
   description: "pushes what it receives",
   fn: ({ IN }, done) => done({ OUT: IN }),
   inports: ["IN"],
