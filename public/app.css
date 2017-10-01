@@ -4,6 +4,8 @@ body {
   font-family: Menlo;
   -webkit-font-smoothing: antialiased;
   background: #222;
+  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
 }
 
 svg {
@@ -50,6 +52,7 @@ path.oldEdge {
 }
 
 text {
+  -webkit-user-select: none;
   user-select: none;
 }
 
