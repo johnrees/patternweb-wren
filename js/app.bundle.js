@@ -19636,7 +19636,8 @@ var panZoom = svgPanZoom("svg", {
   fit: true,
   center: true,
   preventMouseEventsDefault: false,
-  zoomScaleSensitivity: 0.5,
+  zoomScaleSensitivity: 0.3,
+  dblClickZoomEnabled: false,
   maxZoom: 6,
   minZoom: 0.4
 });
