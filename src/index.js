@@ -166,6 +166,6 @@ const panZoom = svgPanZoom("svg", {
   center: true,
   preventMouseEventsDefault: false,
   zoomScaleSensitivity: 0.5,
-  maxZoom: 2,
+  maxZoom: 6,
   minZoom: 0.4
 });
