@@ -66,8 +66,8 @@ const dimensions = {
 //   console.log
 // )("something")
 
-console.time("debug")
+// console.time("debug")
 graph.run(db, function() {
   console.log('done')
-  console.timeEnd("debug")
+  // console.timeEnd("debug")
 })
