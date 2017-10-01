@@ -4,18 +4,19 @@ const attributes = require("snabbdom-to-html/modules/attributes");
 const _toHTML = init([attributes]);
 
 const h = {
-  fn: ({ NAME, OBJECT=undefined, CHILDREN=undefined }, done) => done({ VNODE: _h(NAME, OBJECT, CHILDREN) }),
+  fn: ({ NAME, OBJECT = undefined, CHILDREN = undefined }, done) =>
+    done({ VNODE: _h(NAME, OBJECT, CHILDREN) }),
   inports: ["NAME", "OBJECT", "CHILDREN"],
   outports: ["VNODE"]
-}
+};
 
 const toHTML = {
   fn: ({ VNODE }, done) => done({ HTML: _toHTML(VNODE) }),
   inports: ["VNODE"],
   outports: ["HTML"]
-}
+};
 
 module.exports = {
   h,
   toHTML
-}
+};

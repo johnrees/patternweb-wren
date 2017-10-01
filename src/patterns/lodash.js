@@ -15,25 +15,28 @@ function _offset(points, delta, miterLimit = 10, scale = 100) {
 }
 
 const get = {
-  fn: ({ OBJECT, PATH, DEFAULT_VALUE=undefined }, done) => done({ VALUE: _.get(OBJECT, PATH, DEFAULT_VALUE) }),
+  fn: ({ OBJECT, PATH, DEFAULT_VALUE = undefined }, done) =>
+    done({ VALUE: _.get(OBJECT, PATH, DEFAULT_VALUE) }),
   inports: ["OBJECT", "PATH", "DEFAULT_VALUE"],
   outports: ["VALUE"]
-}
+};
 
 const divide = {
-  fn: ({ DIVIDEND, DIVISOR }, done) => done({ QUOTIENT: _.divide(DIVIDEND, DIVISOR) }),
+  fn: ({ DIVIDEND, DIVISOR }, done) =>
+    done({ QUOTIENT: _.divide(DIVIDEND, DIVISOR) }),
   inports: ["DIVIDEND", "DIVISOR"],
   outports: ["QUOTIENT"]
-}
+};
 
 const map = {
-  fn: ({ COLLECTION, ITERATEE }, done) => done({ RESULT: _.map(COLLECTION, ITERATEE) }),
+  fn: ({ COLLECTION, ITERATEE }, done) =>
+    done({ RESULT: _.map(COLLECTION, ITERATEE) }),
   inports: ["COLLECTION", "ITERATEE"],
   outports: ["RESULT"]
-}
+};
 
 module.exports = {
   get,
   divide,
   map
-}
+};

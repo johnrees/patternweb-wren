@@ -15,11 +15,12 @@ function _offset(points, delta, miterLimit = 10, scale = 100) {
 }
 
 const offset = {
-  fn: ({ POINTS, DELTA, MITER_LIMIT, SCALE }, done) => done({ POINTS: _offset(POINTS, DELTA, MITER_LIMIT, SCALE) }),
+  fn: ({ POINTS, DELTA, MITER_LIMIT, SCALE }, done) =>
+    done({ POINTS: _offset(POINTS, DELTA, MITER_LIMIT, SCALE) }),
   inports: ["POINTS", "DELTA", "SCALE"],
   outports: ["POINTS"]
-}
+};
 
 module.exports = {
   offset
-}
+};

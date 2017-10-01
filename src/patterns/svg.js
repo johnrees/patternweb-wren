@@ -5,15 +5,17 @@ function _makePathFromPoints(points, closed) {
     .map(point => `${point}`)
     .join(" ");
   const end = closed ? "z" : "";
-  return [start,middle,end].join("");
+  return [start, middle, end].join("");
 }
 
 const makePathFromPoints = {
-  fn: ({ POINTS, CLOSED=false }, done) => done({ PATH: _makePathFromPoints(POINTS, CLOSED) }),
+  fn: ({ POINTS, CLOSED = false }, done) =>
+    done({ PATH: _makePathFromPoints(POINTS, CLOSED) }),
   inports: ["POINTS", "CLOSED"],
   outports: ["PATH"]
 };
 
 module.exports = {
-  makePathFromPoints
-}
+  makePathFromPoints,
+  _makePathFromPoints
+};

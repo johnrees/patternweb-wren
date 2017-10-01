@@ -2,17 +2,15 @@ function _calculateDefaultPoints({ height, width, wallHeight, roofOffset }) {
   return [
     [0, height],
     [width, height],
-    [
-      width,
-      height - wallHeight
-    ],
+    [width, height - wallHeight],
     [width / 2 + roofOffset, 0],
     [0, height - wallHeight]
   ];
 }
 
 const makeCorePoints = {
-  fn: ({ DIMENSIONS }, done) => done({ POINTS: _calculateDefaultPoints(DIMENSIONS) }),
+  fn: ({ DIMENSIONS }, done) =>
+    done({ POINTS: _calculateDefaultPoints(DIMENSIONS) }),
   inports: ["DIMENSIONS"],
   outports: ["POINTS"]
 };
@@ -48,7 +46,7 @@ const makeCorePoints = {
 
 // function _calculateFrameEdgePoints([startPoint, endPoint], overrides = null) {
 function _calculateFrameEdgePoints(value) {
-  return value
+  return value;
   // const distance = Point.distance(startPoint, endPoint);
   // const pointPositions = _calculate1DFrameEdgePoints(distance, overrides);
   // // return original points because if start or end points are floats they might be modified slightly during
@@ -73,4 +71,4 @@ const edgePoints = {
 module.exports = {
   makeCorePoints,
   edgePoints
-}
+};

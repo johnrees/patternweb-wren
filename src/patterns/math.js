@@ -6,4 +6,4 @@ const flipFlop = {
 
 module.exports = {
   flipFlop
-}
+};

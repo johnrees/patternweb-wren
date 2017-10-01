@@ -1,0 +1,22 @@
+* { box-sizing: border-box; margin: 0; }
+
+body {
+  font-family: Menlo;
+}
+
+svg {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  cursor: -webkit-grab;
+}
+
+path {
+  stroke: black;
+  fill: none;
+}
+
+text {
+  font-size: 8px;
+  user-select: none;
+}

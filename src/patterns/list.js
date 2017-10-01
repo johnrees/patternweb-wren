@@ -39,4 +39,4 @@ const loopifyInPairs = {
 
 module.exports = {
   loopifyInPairs
-}
+};

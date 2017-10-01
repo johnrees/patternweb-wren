@@ -8,8 +8,8 @@ const add = {
 
 const log = {
   fn: ({ INPUT }, done) => {
-    console.log(INPUT)
-    done({})
+    console.log(INPUT);
+    done({});
   },
   inports: ["INPUT"],
   outports: []
@@ -27,4 +27,4 @@ module.exports = {
   add,
   repeater,
   log
-}
+};
