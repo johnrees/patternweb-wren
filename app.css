@@ -1,0 +1,65 @@
+* { box-sizing: border-box; margin: 0; }
+
+body {
+  font-family: Menlo;
+  -webkit-font-smoothing: antialiased;
+  background: #222;
+}
+
+svg {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  cursor: -webkit-grab;
+}
+
+g.node circle {
+  fill: #FFF;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+g.inports text, g.outports text {
+  font-size: 6px;
+  fill: #AAA;
+}
+
+path.edge {
+  stroke: #FFF;
+  fill: none;
+  stroke-width: 1px;
+  -webkit-filter: drop-shadow( -5px -5px 5px #000 );
+  filter: drop-shadow( -5px -5px 5px #000 );
+}
+
+path.edge:hover {
+  stroke-width: 3px;
+}
+
+path.oldEdge {
+  stroke: #666;
+  fill: none;
+  stroke-width: 1px;
+  stroke-dashoffset: 22;
+  stroke-dasharray: 10 1;
+  animation: dash 0.5s linear;// infinite;
+}
+
+text {
+  user-select: none;
+}
+
+g.node text.id {
+  font-size: 8px;
+  fill: #FFF;
+}
+
+g.node text.component {
+  font-size: 7px;
+  user-select: none;
+  fill: #888;
+}
