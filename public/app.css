@@ -24,6 +24,12 @@ g.node circle {
 }
 
 path.edge {
+  stroke: #FFF;
+  fill: none;
+  stroke-width: 1px;
+}
+
+path.oldEdge {
   stroke: #666;
   fill: none;
   stroke-width: 1px;

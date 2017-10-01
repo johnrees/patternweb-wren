@@ -1,5 +1,6 @@
 const { layout } = require("./graph")
 const { _makePathFromPoints } = require("./patterns/svg")
+const svgPanZoom = require("svg-pan-zoom")
 const PW = require("patternweb")
 const p = require("./patterns")
 const _ = require("lodash")
@@ -84,7 +85,18 @@ function handleNodeClick(event, node) {
   console.log(JSON.stringify(db[node.elm.id], null, 2))
 }
 
-const makePort = (port, index) => h("circle", { attrs: { cy: 5 * index, r: 1.5 }})
+let portPositions = {}
+const makePort = (direction, obj) => (key, x, parentX, parentY) => (port, index) => {
+  const cy = 12 * index
+  let _name = [key,port]
+  _name = (direction === "OUT") ? _name : _name.reverse()
+
+  obj[_name.join(">")] = [x + parentX, cy + parentY]
+
+  return h("circle", { attrs: { cy, r: 3.5 }})
+}
+const makeInport = makePort("IN", portPositions)
+const makeOutport = makePort("OUT", portPositions)
 
 const {nodes, edges} = layout(graph)
 const nodeElements = Object.keys(nodes).map(key => {
@@ -93,21 +105,39 @@ const nodeElements = Object.keys(nodes).map(key => {
 
   const component = $node.component.name || "?"
 
-  const inports = $node.component.inports.map(makePort)
-  const outports = $node.component.outports.map(makePort)
+  const inports = $node.component.inports.map(makeInport(key,-node.width/2, node.x-2, node.y))
+  const outports = $node.component.outports.map(makeOutport(key,node.width/2, node.x+2, node.y))
 
   return h("g.node", { on: { click: handleNodeClick }, attrs: { id: key, transform: `translate(${node.x}, ${node.y})` }}, [
-    h("rect", { attrs: { width: node.width, height: node.height, x: -node.width/2, y: -node.height/2 }}),
     h("g.inports", { attrs: { transform: `translate(${-node.width/2}, 1)` }}, inports),
     h("g.outports", { attrs: { transform: `translate(${node.width/2}, 1)` }}, outports),
+    h("rect", { attrs: { width: node.width, height: node.height, x: -node.width/2, y: -node.height/2 }}),
     h("text.id", { attrs: { y: -20, "text-anchor": "middle" }}, key),
     h("text.component", { attrs: { y: -10, "text-anchor": "middle" }}, component)
   ])
 })
 
-const edgeElements = edges.map(points => h("path.edge", { attrs: { d: _makePathFromPoints(points, false) }}))
+function calculateJoin([startX, startY], [endX, endY]) {
+  const curve = Math.abs(startX - endX) / 2;
+  return [
+    ["M"],
+    [startX, startY],
+    ["C"],
+    [startX + curve, startY],
+    [endX - curve, endY],
+    [endX, endY]
+  ]
+    .map(x => x.join(","))
+    .join(" ");
+}
 
-const graphData = edgeElements.concat(nodeElements)
+const newEdges = Object.keys(graph.edges()).map(edges => {
+  return edges.split("-").map(edge => portPositions[edge])
+}).map(points => calculateJoin(...points)).map(d => h("path.edge", { attrs: { d }}))
+
+// const edgeElements = edges.map(points => h("path.oldEdge", { attrs: { d: _makePathFromPoints(points, false) }}))
+// const graphData = [...edgeElements, ...nodeElements, ...newEdges]
+const graphData = [...nodeElements, ...newEdges]
 
 function render() {
   vnode = patch(vnode, view(graphData));
